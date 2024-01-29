@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portrait Chinois</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="img/B.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Mon portrait chinois</h1>
+            <nav>
+             <a href="#Couleur">Couleur</a>
+             <a href="#Livre">Livre</a>
+              <a href="#Dessin-animé">Dessin animé</a>
+              <a href="#Fruit">Fruit</a>
+             <a href="#Lieux">Lieux</a>
+             <a href="#Jeu-vidéo">Jeu vidéo</a>
+             <a href="#Animal">Animal</a>
+            </nav>
+    </header>
+
+    <main>
+        <div class="liste-analogies"></div>
+        <div class="analogie-ajouté"></div>
+    </main>
+
+    <div class="popup popupInvisible"> <img src='' alt=""></div>
+
+    <footer>
+        <h3>Ajoutez une catégorie</h3>
+        <form action="">
+            <fieldset>
+                <legend>Créez votre catégorie</legend>
+            <div class="champs">
+                <label for="analogie">* Si j'étais</label><input type="text" id="analogie" name="Si j'etais" required>
+            </div>
+            <div class="champs">
+                <label for="valeurAnalogie">* Je serais</label><input type="text" id="valeurAnalogie" name="Je serais" required>
+            </div><br>
+            <label for="pourquoi"> Pourquoi ? <br></label><textarea id="pourquoi" cols="60" rows="5" name="Pourquoi"></textarea><br>
+            <input type="button" value="Envoyer">
+            </fieldset>
+        </form>
+
+       <h3><a href="#bottom" class="afficher">Mention Legales</a></h3>
+        <div class="mentionsLegales">
+           <a href=" https://pixabay.com/fr/photos/poisson-eau-mer-poisson-clown-eau-2241634/ ">Image animal</a>
+           <a href="https://pixabay.com/fr/vectors/poire-fruit-mod%C3%A8le-art-conception-6541074/ ">Image fruit</a>
+           <a href=" https://pixabay.com/fr/photos/mer-animal-m%C3%A9duse-animal-marin-21649/ ">Image couleur</a>
+           <a href="https://pixabay.com/fr/photos/bleu-mazarine-papillon-fleur-7753988/">Image jeu video</a>
+           <a href="https://pixabay.com/fr/photos/parc-banc-nuit-soir%C3%A9e-brouillard-3116883/">Image livre</a>
+           <a href=" https://pixabay.com/fr/photos/fleur-ros%C3%A9e-p%C3%A2querette-daisy-1144088/">Image lieu</a>
+           <a href="https://pixabay.com/fr/illustrations/cat-poisson-vintage-curieux-4637643/">Image dessin animé</a>
+           <p>
+            the Content License allows users to:
+            ✓	Use Content for free
+            ✓	Use Content without having to attribute the author (although giving credit is always appreciated by our community!)
+            ✓	Modify or adapt Content into new works
+           </p>
+        </div>
+
+        <p class="auteur">
+            Auteur : Beryl Marchand--Bertin tp-D
+        </p>
+    </footer>
+</body>
+
+
+<script src="data.js"></script>
+
+<script>
+
+    data.forEach(function (ligne) {
+        var element = "Si j'étais " + ligne['analogie'] + ", je serais " + ligne['valeur'];
+        document.querySelector('.liste-analogies').innerHTML += "<section id=" + ligne['id'] + " class=" + ligne['class'] + "><h2>" + element + ".</h2><p>" + ligne['explication'] + '</p> <img src="' + ligne['image'] + '" alt="'+ ligne["valeur"]+'" class="imageCliquable"> </section> '
+    })
+
+
+    var afficher = document.querySelector(".afficher")
+    var mentionsLegales = document.querySelector(".mentionsLegales")
+
+    afficher.addEventListener('click', function (event){
+        if(mentionsLegales.style.display=="block"){
+             mentionsLegales.style.display="none";
+        }
+       else{
+        mentionsLegales.style.display="block"
+       }
+    })
+
+
+
+
+
+    var popup = document.querySelector(".popup");
+
+    document.querySelectorAll(".imageCliquable").forEach(function (element) {
+        element.addEventListener("click", function (event) {
+            document.querySelector(".popup img").setAttribute('src', element.getAttribute('src'))
+            popup.classList.remove("popupInvisible");
+            popup.classList.add("popupVisible");
+        })
+    })
+
+    popup.addEventListener("click", function (event) {
+        popup.classList.remove("popupVisible");
+        popup.classList.add("popupInvisible");
+    })
+
+
+    document.querySelectorAll("input#analogie , input#valeurAnalogie, textarea#pourquoi").forEach(function (element) {
+        element.addEventListener('keyup', function (event) {
+            console.log(document.querySelector("textarea#pourquoi").value)
+            document.querySelector('.analogie-ajouté').innerHTML = "<section> <h2> Si j'etais " + document.querySelector("input#analogie").value + " Je serais " + document.querySelector("input#valeurAnalogie").value + ". </h2> <p>" + document.querySelector("textarea#pourquoi").value + " </p> </section>"
+        })
+    })
+
+    document.querySelector('input[type="button"]').addEventListener('click', function (envoyer) {
+        fetch("https://perso-etudiant.u-pem.fr/~gambette/portrait/api.php?format=json&login=gambette&courriel=philippe.gambette@univ-eiffel.fr&message=Si j'etais " + document.querySelector("input#analogie").value + " Je serais " + document.querySelector("input#valeurAnalogie").value + ". " + document.querySelector("textarea#pourquoi").value).then(function (response) {
+            response.json().then(function (data) {
+                console.log("Réponse reçue : ")
+                console.log(data);
+            })
+        })
+    })
+
+
+
+    //AVEC DEUX TABLEAU
+    //analogies.forEach(function(element){
+    // console.log(numCase)
+    //element="Si j'etais..."+element+", je serais..."//+valeursAnalogies[numCase];
+    // document.querySelector('.liste-analogies').innerHTML += "<section><h2>" + element + ".</h2></section>"
+    // numCase++
+    // console.log(element) })
+
+    //AVEC UN TABLEAU D'OBJET
+    //data.forEach(function(ligne){
+    // var element="Si j'etais "+ligne['analogie']+", je serais "+ligne['valeur'];
+    // document.querySelector('.liste-analogies').innerHTML += "<section><h2>" + element + ".</h2></section>"
+    //  console.log(element)})
+
+    //AVEC FETCH SI CA MARCHE PAS C NORMAL FETCH N4EST PAS ACCEPT2 PAR LA PLUPART DES NAVIGATEUR
+
+
+    //fetch('analogies.json').then(function(response) {
+    // response.json().then(function(data){
+    // console.log(data);
+    // data.forEach(function(ligne){
+    // var element="Si j'etais "+ligne['analogie']+", je serais "+ligne['valeur'];
+    //  document.querySelector('.liste-analogies').innerHTML += "<section><h2>" + element + ".</h2></section>"
+    //  console.log(element)})
+    //  })
+    // })
+
+</script>
+
+</html>

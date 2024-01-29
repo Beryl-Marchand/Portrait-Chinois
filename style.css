@@ -1,0 +1,163 @@
+*,
+*::before,
+*::after{
+   box-sizing: border-box;
+}
+
+body{
+   margin: 0;
+   background-color: black;
+   padding-left: 15%;
+   padding-right: 15%;
+   
+}
+
+main{
+   margin: 0 auto;
+   background-color: white;
+   min-width: 800px;
+
+}
+
+header{
+   text-align: center;
+   padding: 10px;
+   padding-top: 5px;
+   background-color: rgb(0, 0, 0);
+   padding-bottom: 30px;
+   
+}
+
+footer{
+   background-color: black;
+   text-align: center;
+   padding: 30px;
+}
+
+label{
+   color: white;
+}
+
+input{
+   margin: 10px;
+}
+
+
+h1{
+   color: white;
+   font-family: 'Bodoni Moda', serif;
+   font-size: 5rem;
+   margin-left: auto;
+   margin-right: auto;
+   
+}
+
+h2{
+   font-family: 'Bodoni Moda', serif;
+   font-size: 4rem;
+   margin: 0;
+}
+
+h3{
+   color: white;
+   font-size: 2rem;
+   font-family: 'Bodoni Moda', serif;
+}
+
+p{
+   font-family: 'Bitter', serif;
+   font-size: 1,7rem;
+   border: solid black 1px;
+   padding: 20px;
+   
+}
+
+
+a{
+   text-decoration: none;
+   display: inline-block;
+   font-size: 1.5rem;
+   color: white;
+   margin: 5px;
+   padding: 10px;
+   transition: ease 0.8s;
+   margin-bottom: 10px;
+   margin-top: 10px;
+}
+
+a:hover{
+   background-color: rgb(255, 255, 255);
+   color: black;
+}
+
+legend{
+   color: white;
+   font-family: 'Bodoni Moda', serif;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+section{
+   border-bottom: solid black 50px;
+   padding: 50px;
+}
+
+section:nth-of-type(even){
+   text-align: right;
+}
+
+.auteur{
+   color: white;
+}
+
+.mentionsLegales{
+   display: none;
+   color: white;
+   border: dashed white 1px;
+   padding: 10px;
+}
+
+.champs{
+
+   width: 40%;
+   display: inline-block;
+}
+
+@media (max-width: 600px) { 
+.champs{
+
+   width: 100%;
+   display: inline-block;
+} 
+}
+
+
+.imageCliquable{
+   width: 70%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.popup{
+   position: fixed;
+   left: 50vw;
+   right: 0;
+   top: 50vh;
+   bottom: 0;
+   transform: translate(-50%, -50%);
+}
+
+.popup img{
+   width: 100%;
+}
+
+.popupVisible{
+   display: block;
+   
+  
+}
+
+.popupInvisible{
+   display: none;
+}
+
